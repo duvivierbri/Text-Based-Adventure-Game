@@ -26,25 +26,72 @@ public class MyCreature implements Creature{
 
 	@Override
 	public void attack(Creature creature) {
-		// TODO Auto-generated method stub
+		System.out.println(this.name + " attacks " + creature + " dealing " + this.damage + ".");
 		
 	}
 
 	@Override
 	public void takeDamage(int damage) {
-		// TODO Auto-generated method stub
+		this.hitPoints = this.hitPoints - damage;
 		
 	}
 
 	@Override
 	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.hitPoints > 0) {
+			System.out.println("It's still alive");
+			return true;
+		} else {
+			System.out.println("It's dead");
+			return false;
+		}
 	}
 	
 	@Override
 	public String toString(){
-		return ""; //Just for now... not yet set
+		System.out.printf("name %15s, description %20s, hitPoints %03d, damage %02d \n",this.name, this.description,this.hitPoints,this.damage);
+		return "";
+	}
+	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setDescription(String dsc) {
+		this.description = dsc;
+	}
+	
+	public void setHP(int HP) {
+		this.hitPoints = HP;
+	}
+	
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+	
+	public void setRoom(int room) {
+		this.room = room;
+	}
+	
+	public int getHP() {
+		return this.hitPoints;
+	}
+	
+	public int getDamage() {
+		return this.damage;
+	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public int getRoom() {
+		return this.room;
 	}
 	
 

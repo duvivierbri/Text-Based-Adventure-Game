@@ -3,17 +3,24 @@ package gamepackage;
 public class MyTreasureRoom extends MyRoom implements TreasureRoom{
 
 	private String treasure;
+
+	public MyTreasureRoom() {
+		super();//roomindex, description and monster
+		treasure = "";
+	}
+	
+	public MyTreasureRoom(int RI, String desc, MyMonster monster, String trea) {
+		super(RI,desc,monster);
+		this.treasure = trea;
+	}
 	
 	@Override
-	public boolean isComplete() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public void enter(Player player) {
-		// TODO Auto-generated method stub
+		super.enter(player);
 		
+		if (super.getMonster().getHitPoints() <= 0) {
+			System.out.println("Congratulations! You've obtained the " + this.treasure);
+		}
 	}
 	
 }

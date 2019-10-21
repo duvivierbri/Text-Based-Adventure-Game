@@ -1,50 +1,54 @@
 package gamepackage;
 
 public class MyMonster extends MyCreature implements Monster{
-	
-	private String name;
-	private String description;
-	private int hitPoints;
-	private int damage;
-	private int room;
 	//attributes specifically for monsters
 	private int enrageThreshold;
 	
 	public MyMonster() {
-		name = "";
-		description = "";
-		hitPoints = 0;
-		damage = 0;
-		room = 0;
+		super(); //brings down the name,description, hitpoints,damage and room
 		enrageThreshold = 0;
 	}
 	
-	public MyMonster(String name, String dcrp, int hp, int damage, int room, int et) {
-		this.name = name;
-		this.description = dcrp;
-		this.hitPoints = hp;
-		this.damage = damage;
-		this.room = room;
+	public MyMonster(String name, String description, int HP, int damage, int room, int et) {
+		super(name,description,HP,damage,room);
 		this.enrageThreshold = et; //phone home
 	}
 	
 	public int getHitPoints() {
-		return this.hitPoints;
+		int thisHP = super.getHP();
+		return thisHP;
+	}
+	
+	public String getName() {
+		String thisMonstersName;
+		thisMonstersName = super.getName();
+		return thisMonstersName;
+	}
+	
+	public void setThreshhold(int num) {
+		this.enrageThreshold = num;
 	}
 	
 	@Override
 	public void enrage() {
-		if (this.hitPoints < this.enrageThreshold) {
-			this.damage = this.damage *2;
+		int newDamage;
+		int damage = super.getDamage();
+		if (super.getHP() < this.enrageThreshold) {
+			newDamage = damage *2;
+			System.out.println(newDamage);
+		} else {
+			System.out.println("Cannot enrage");
 		}
 		
 	}
 
 	@Override
 	public boolean canEnrage() {
-		if (this.hitPoints < this.enrageThreshold) {
+		if (super.getHP() < this.enrageThreshold) {
+			System.out.println("True");
 			return true;
 		}else {
+			System.out.println("False");
 			return false;
 		}
 	}
