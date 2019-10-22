@@ -80,6 +80,10 @@ public class MyCreature implements Creature{
 	
 	public int getDamage() {
 		return this.damage;
+		
+		if (this.hitPoints < 0){
+			this.hitPoints = 0;
+		}
 	}
 	
 	public String getDescription() {
