@@ -24,28 +24,24 @@ public class MyBattle implements Battle{
 	
 	@Override
 	public void run() {
-		Scanner scnr = new Scanner(System.in);
-		
-		//this.monster.toString();
-		//this.player.toString();
 		
 		do {
-			
+			Scanner scnr = new Scanner(System.in);
 			//Player's turn if statements!
 			if (yourTurn && this.player.getHP() > 0) {
 				System.out.println("Its your turn! Make your move...");
 				move = scnr.next();
-					//setting possible moves
+					//setting possible moves for the player
 					if (move.equalsIgnoreCase("attack")) {
 						System.out.println("You violently slash the " + this.monster.getName() + 
 								" causing them to stagger back in pain. \n You make " + this.player.getDamage() + " damage.");
 						this.monster.takeDamage(this.player.getDamage()); //monster gets hit
 					} else {
 						if (move.equalsIgnoreCase("heal")) {
-							if (this.player.getHP() == 100) { //If they already have full health they cant heal.. thats cheating!!
+							if (this.player.getHP() == 100) { //If they already have full health they can't heal.. thats cheating!!
 								System.out.println("You cannot heal, you have full health!");
 							} else {
-								System.out.println("You drink the magical potion you took on you journey, giving you " + this.player.getHealAmount() +
+								System.out.println("You eat one of the apples you took on your journey, giving you " + this.player.getHealAmount() +
 										" more HP!! \n You now have " + this.player.getHP() + " HP!!");
 								this.player.heal();
 							}
@@ -53,6 +49,13 @@ public class MyBattle implements Battle{
 						this.monster.toString();
 						this.player.toString();
 					}
+					
+					if (this.monster.getHP() <= 0) {
+						System.out.println("You win!");
+						battleInProgress = false;
+						break;
+					} 
+					
 				yourTurn = false;
 				opponentTurn = true;
 			}
@@ -60,34 +63,45 @@ public class MyBattle implements Battle{
 			
 			//Monster's turn if statements!
 			if(opponentTurn && this.monster.getHP() > 0) {
+				int damage = this.monster.getDamage();
+				int enragedDamaged = damage * 2;
 				System.out.println("Monster's turn!");
-				System.out.println(this.monster.getName() + " attacked you! You lose " + this.monster.getDamage() + " HP!");
-				this.player.takeDamage(this.monster.getDamage()); //player gets hurt!
+					if (this.monster.getHP() > this.monster.getEnrage()) {
+						System.out.println(this.monster.getName() + " attacked you! You lose " + damage + " HP!");
+						this.player.takeDamage(damage); //player gets hurt!
+					} else {
+						System.out.println(this.monster.getName() + " is enraged and attacked you! You lose " + enragedDamaged + " HP!");
+						this.player.takeDamage(enragedDamaged); //player gets hurt!
+					}
 				System.out.println("Type anything and press enter to continue....");
 				move = scnr.next();
 				opponentTurn = false;
 				yourTurn = true;
+				
+				if (this.player.getHP() <= 0) {
+					System.out.println("You lose!");
+					battleInProgress = false;
+					break;
+				}
 				
 				this.monster.toString();
 				this.player.toString();
 			}
 			
 			//And when one of them dies... you either say you win or you lose!
-			if (this.monster.getHP() <= 0) {
-				System.out.println("You win!");
-				break;
-			} else if (this.player.getHP() <= 0) {
-				System.out.println("You lose!");
-				break;
-			}
+			
 
 			if (this.monster.getHP() <= 0 || this.player.getHP() <= 0) {
 				battleInProgress = false;
 			}
+			
+			if (battleInProgress = false) {
+				scnr.close();
+				break;
+			}
+			
 		}while (battleInProgress = true);
-		
-		scnr.close(); //now close the scanner :)
-		
+		 //now close the scanner :)
 	}
 
 }

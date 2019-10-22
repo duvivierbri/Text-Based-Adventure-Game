@@ -18,8 +18,8 @@ public class MyTreasureRoom extends MyRoom implements TreasureRoom{
 	public void enter(Player player) {
 		super.enter(player);
 		
-		if (super.getMonster().getHitPoints() <= 0) {
-			System.out.println("Congratulations! You've obtained the " + this.treasure);
+		if (isComplete()) {
+			System.out.println("Congratulations! You've obtained " + this.treasure + "!");
 		}
 	}
 	

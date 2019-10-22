@@ -14,15 +14,9 @@ public class MyMonster extends MyCreature implements Monster{
 		this.enrageThreshold = et; //phone home
 	}
 	
-	public int getHitPoints() {
-		int thisHP = super.getHP();
-		return thisHP;
-	}
 	
-	public String getName() {
-		String thisMonstersName;
-		thisMonstersName = super.getName();
-		return thisMonstersName;
+	public int getEnrage() {
+		return this.enrageThreshold;
 	}
 	
 	public void setThreshhold(int num) {
@@ -32,8 +26,8 @@ public class MyMonster extends MyCreature implements Monster{
 	@Override
 	public void enrage() {
 		int newDamage;
-		int damage = super.getDamage();
-		if (super.getHP() < this.enrageThreshold) {
+		int damage = this.getDamage();
+		if (canEnrage()) {
 			newDamage = damage *2;
 			System.out.println(newDamage);
 		} else {
@@ -44,7 +38,7 @@ public class MyMonster extends MyCreature implements Monster{
 
 	@Override
 	public boolean canEnrage() {
-		if (super.getHP() < this.enrageThreshold) {
+		if (this.getHP() < this.enrageThreshold) {
 			System.out.println("True");
 			return true;
 		}else {

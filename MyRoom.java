@@ -23,9 +23,13 @@ public class MyRoom implements Room{
 		return this.monster;
 	}
 	
+	public String getDescription() {
+		return this.description;
+	}
+	
 	@Override
 	public boolean isComplete() {
-		if (this.monster.getHitPoints() <= 0) {
+		if (this.monster.getHP() <= 0) {
 			System.out.println("The monster has died");
 			return true;
 		} else {
