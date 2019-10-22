@@ -15,7 +15,10 @@ public class MyGame implements Game{
 		
 		FileInputStream fileStream = null;
 		Scanner outStream = null;
-		
+		FileHandler handler = new FileHandler();
+		handler.createNewFile("PlayerInfo.txt"); //For the player info
+		handler.createNewFile("SaveFile.txt"); //For the save file.. everything will go here
+		handler.writeToNewFile("PlayerInfo.txt", "Faith\na powerful warrior who wants to save her dog who was stolen by the Evil Witch\n100\n20\n50");
 		fileStream = new FileInputStream("PlayerInfo.txt");
 		outStream = new Scanner(fileStream);
 		String name = "";
@@ -62,9 +65,7 @@ public class MyGame implements Game{
 	@Override
 	public void play() {
 		FileHandler handler = new FileHandler();
-		handler.createNewFile("PlayerInfo.txt"); //For the player info
-		handler.createNewFile("SaveFile.txt"); //For the save file.. everything will go here
-		handler.writeToNewFile("PlayerInfo.txt", "Faith\na powerful warrior who wants to save her dog who was stolen by the Evil Witch\n100\n20\n50");
+		
 		Scanner scnr = new Scanner(System.in);
 		String initiate = "";
 		String answer;
